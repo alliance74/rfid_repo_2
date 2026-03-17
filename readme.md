@@ -27,3 +27,6 @@ An **RFID-based POS and Recharge system** using ESP8266, Flask, and a "Live" gla
 * **Browser ↔ Flask:** WebSocket (Socket.IO) for live tap and result events.
 * **Browser ↔ Flask:** HTTP POST for cart checkouts and administrative refills.
 * **Flask ↔ MQTT:** Dispatches balance adjustment commands to hardware.
+
+The new link for PWA
+https://monotypic-unfiltrated-teofila.ngrok-free.dev/
