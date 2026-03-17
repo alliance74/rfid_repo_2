@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus POS | Live Terminal</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/output.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#4f46e5">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -324,6 +327,17 @@
                 alert("Insufficient Funds! ❌");
             }
         });
+    </script>
+    <script>
+        // Register the Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            // Notice we are registering it from the root '/sw.js'
+            navigator.serviceWorker.register("/sw.js")
+                .then(reg => console.log("PWA: Service Worker Registered!"))
+                .catch(err => console.error("PWA: Registration Failed", err));
+            });
+        }
     </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_socketio import SocketIO
 import paho.mqtt.client as mqtt
 import json
@@ -75,6 +75,14 @@ mqtt_client.loop_start()
 def index():
     return render_template('dashboard.html')
 
+@app.route('/dashboard.html')
+def hello():
+    return render_template('dashboard.html')
+
+@app.route('/favicon.ico')
+def display_favicon():
+    return send_from_directory('static', 'icons/icon-192.png')
+
 @app.route('/api/checkout', methods=['POST'])
 def start_checkout():
     global checkout_queue
@@ -88,6 +96,10 @@ def topup():
     data = request.json
     mqtt_client.publish(TOPIC_TOPUP, json.dumps(data))
     return jsonify({"status": "command_sent"})
+
+@app.route('/sw.js')
+def serve_sw():
+    return send_from_directory('static', 'sw.js')
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=5000)
